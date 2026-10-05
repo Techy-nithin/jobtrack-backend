@@ -53,39 +53,49 @@ Users can register and log in securely, track job applications, manage interview
 - Git
 - GitHub
 
+### Deployment
+
+- Render — Spring Boot Backend
+- Aiven — MySQL Database
+- Vercel — React Frontend
+
 ## Architecture
 
 JobTrack follows a layered backend architecture:
 
-    React Frontend
-          ↓
-       Axios
-          ↓
-    Spring Boot REST API
-          ↓
-       Controller
-          ↓
-        Service
-          ↓
-      Repository
-          ↓
-        MySQL
+```text
+React Frontend
+      ↓
+     Axios
+      ↓
+Spring Boot REST API
+      ↓
+   Controller
+      ↓
+    Service
+      ↓
+   Repository
+      ↓
+   MySQL
+```
 
 ### Authentication Flow
 
-    User Login
-        ↓
-    Spring Security
-        ↓
-    JWT Token Generated
-        ↓
-    Token Stored by Frontend
-        ↓
-    JWT Sent with API Requests
-        ↓
-    JwtAuthenticationFilter
-        ↓
-    Protected Controller
+```text
+User Login
+    ↓
+Spring Security
+    ↓
+JWT Token Generated
+    ↓
+Token Stored by Frontend
+    ↓
+JWT Sent with API Requests
+    ↓
+JwtAuthenticationFilter
+    ↓
+Protected Controller
+```
 
 ## Backend Project Structure
 
@@ -127,11 +137,10 @@ JobTrack follows a layered backend architecture:
     │   ├── JobApplicationRepository.java
     │   └── InterviewRepository.java
     │
-    ├── security
-    │   ├── JwtService.java
-    │   └── JwtAuthenticationFilter.java
-    │
-    └── service
+├── security
+│   ├── JwtService.java
+│   ├── JwtAuthenticationFilter.java
+│   └── CustomUserDetailsService.java    └── service
         ├── UserService.java
         ├── JobApplicationService.java
         └── InterviewService.java
@@ -157,7 +166,8 @@ JobTrack follows a layered backend architecture:
 - `GET /api/applications/{applicationId}/interviews` — Get interviews
 - `PUT /api/applications/{applicationId}/interviews/{interviewId}` — Update interview
 - `DELETE /api/applications/{applicationId}/interviews/{interviewId}` — Delete interview
-## Security
+
+## 🔐 Security
 
 JobTrack uses Spring Security and JWT authentication.
 
@@ -176,7 +186,7 @@ Required environment variables:
 
 ## Database Setup
 
-Create the MySQL database:
+For local development, create a MySQL database:
 
     CREATE DATABASE jobtrack;
 
@@ -206,8 +216,18 @@ On Windows:
 The backend will run at:
 
     http://localhost:8080
+    
+## 🌐 Deployment
 
-## Frontend Repository
+The backend is deployed on Render and uses Aiven MySQL for the production database.
+
+**Backend:**  
+https://jobtrack-backend-to3h.onrender.com
+
+**Frontend:**  
+https://jobtrack-frontend-nine.vercel.app    
+
+## 🔗 Frontend Repository
 
 The React frontend is maintained separately:
 
@@ -238,7 +258,6 @@ The application was tested for:
 - Resume management
 - Job search API integration
 - Automated testing
-- Cloud deployment
 - Role-based access control
 
 ## Author
